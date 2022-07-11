@@ -15,6 +15,10 @@ dependencies {
     api("com.warrenstrange:googleauth:1.5.0")
 }
 
+kotlin {
+    explicitApi()
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
