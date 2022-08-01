@@ -10,7 +10,7 @@ public inline fun googleAuthenticator(builderAction: KGoogleAuthenticatorConfigB
     return GoogleAuthenticator(configBuilder.build())
 }
 
-public inline fun googleAuthenticatorKey(builderAction: KGoogleAuthenticatorKeyBuilder.() -> Unit, key: String): GoogleAuthenticatorKey{
+public inline fun googleAuthenticatorKey(key: String, builderAction: KGoogleAuthenticatorKeyBuilder.() -> Unit): GoogleAuthenticatorKey {
     val keyBuilder = KGoogleAuthenticatorKeyBuilder(GoogleAuthenticatorKey.Builder(key))
     keyBuilder.builderAction()
     return keyBuilder.build()

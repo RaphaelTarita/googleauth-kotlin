@@ -1,13 +1,13 @@
 package com.rtarita.googleauthkotlin
 
+import com.warrenstrange.googleauth.GoogleAuthenticatorConfig
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey.Builder
-import com.warrenstrange.googleauth.GoogleAuthenticatorConfig
 
 @JvmInline
 public value class KGoogleAuthenticatorKeyBuilder(@PublishedApi internal val javaBuilder: Builder) {
     public inline var config: GoogleAuthenticatorConfig
-        inline  get() = javaBuilder.build().config
+        inline get() = javaBuilder.build().config
         inline set(value) {
             javaBuilder.setConfig(value)
         }
@@ -29,6 +29,17 @@ public value class KGoogleAuthenticatorKeyBuilder(@PublishedApi internal val jav
         inline set(value) {
             javaBuilder.setScratchCodes(value)
         }
+
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun scratchCode(code: Int) {
+        javaBuilder.setScratchCodes(javaBuilder.build().scratchCodes + code)
+    }
+
+    public inline fun config(action: KGoogleAuthenticatorConfigBuilder.() -> Unit) {
+        val configBuilder = KGoogleAuthenticatorConfigBuilder(GoogleAuthenticatorConfig.GoogleAuthenticatorConfigBuilder())
+        configBuilder.action()
+        javaBuilder.setConfig(configBuilder.build())
+    }
 
     public inline fun javaBuilder(action: Builder.() -> Unit) {
         javaBuilder.action()
